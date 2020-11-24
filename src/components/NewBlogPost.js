@@ -1,9 +1,14 @@
 import React, {useState} from 'react'
 import {withRouter} from 'react-router-dom'
 import {divStyles, inputStyles, labelStyles} from '../styles'
-import {useGlobalState} from '../config/store'
+// import {useGlobalState} from '../config/store'
+import {useSelector, useDispatch} from "react-redux"
 
 const NewBlogPost = ({history}) => {
+    // useSelector to retrieve state and useDispatch to dispatch action
+    const blogPosts = useSelector(state => state.blogPosts)
+    const dispatch = useDispatch()
+
     const textAreaStyles = {
         height: "200px",
         margin: ".5em",
@@ -50,8 +55,9 @@ const NewBlogPost = ({history}) => {
         content: ""
     } 
     const [formState,setFormState] = useState(initialFormState)
-    const {store, dispatch} = useGlobalState()
-    const {blogPosts} = store
+    // basically useContext will let you access the global state and dispatch in all child components
+    // const {store, dispatch} = useGlobalState()
+    // const {blogPosts} = store
 
     return (
         <form id="newPostForm" onSubmit={handleSubmit}>

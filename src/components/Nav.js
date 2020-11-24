@@ -1,6 +1,8 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import {useGlobalState} from '../config/store'
+// import {useGlobalState} from '../config/store'
+import {useSelector, useDispatch} from "react-redux"
+
 
 const Nav = () => {
     const divStyles = {
@@ -18,8 +20,11 @@ const Nav = () => {
         data: null
         })
     }
-    const {store, dispatch} = useGlobalState()
-    const {loggedInUser} = store
+    // const {store, dispatch} = useGlobalState()
+    // const {loggedInUser} = store
+    const loggedInUser = useSelector(state => state.loggedInUser)
+    console.log("LOGGED IN USER", loggedInUser)
+    const dispatch = useDispatch()
     return (
         <div style={divStyles}>
             {loggedInUser 

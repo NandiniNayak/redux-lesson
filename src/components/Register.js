@@ -1,13 +1,16 @@
 import React, {useState} from 'react'
 import {divStyles, inputStyles, labelStyles} from '../styles'
+import {useDispatch} from "react-redux"
 
-const Register = ({history, registerUser}) => {
+const Register = ({history}) => {
+    // console.log("HISTORY", history)
     const initialFormState = {
         username: "",
         email: "",
         password: ""
     } 
     const [userDetails,setUserDetails] = useState(initialFormState)
+    const dispatch = useDispatch()
 
     function handleChange(event) {
         const name = event.target.name
@@ -21,6 +24,13 @@ const Register = ({history, registerUser}) => {
         event.preventDefault()
         registerUser(userDetails)
         history.push("/")
+    }
+    function registerUser(user){
+        console.log("USER", user)
+        dispatch({
+            type:"setLoggedInUser",
+            data:user.username
+        })
     }
     return (
         <form onSubmit={handleSubmit}>

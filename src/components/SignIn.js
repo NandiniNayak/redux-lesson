@@ -1,12 +1,14 @@
 import React, {useState} from 'react'
 import {divStyles, inputStyles, labelStyles} from '../styles'
+import {useDispatch} from "react-redux"
 
-const SignIn = ({history, loginUser}) => {
+const SignIn = ({history}) => {
     const initialFormState = {
         username: "",
         password: ""
     } 
     const [userDetails,setUserDetails] = useState(initialFormState)
+    const dispatch = useDispatch()
 
     function handleChange(event) {
         const name = event.target.name
@@ -20,6 +22,12 @@ const SignIn = ({history, loginUser}) => {
         event.preventDefault()
         loginUser(userDetails)
         history.push("/")
+    }
+    function loginUser(user){
+        dispatch({
+            type: "setLoggedInUser",
+            data: user.username
+        })
     }
     return (
         <form onSubmit={handleSubmit}>

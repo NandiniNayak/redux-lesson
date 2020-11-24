@@ -1,4 +1,10 @@
-export default function (state, action) {
+ // initial state for state reducer
+const initialState = {
+    blogPosts: [],
+    loggedInUser: null
+  }
+
+export default function (state = initialState , action) {
     switch(action.type) {
         case "setLoggedInUser": {
             return {
